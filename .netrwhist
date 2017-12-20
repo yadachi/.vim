@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/yosuke.adachi'
+let g:netrw_dirhist_2='/Users/yosuke.adachi/Documents'
+let g:netrw_dirhist_3='/Users/yosuke.adachi/Documents/aws'
+let g:netrw_dirhist_4='/Users/yosuke.adachi/Documents/aws/linux_stack'
+let g:netrw_dirhist_5='/Users/yosuke.adachi/Documents/aws/linux_stack/gdopsww'
+let g:netrw_dirhist_6='/Users/yosuke.adachi/Documents/aws/linux_stack/gdopsww/deployment'
+let g:netrw_dirhist_7='/Users/yosuke.adachi/Documents/aws/linux_stack/gdopsww/deployment/hk2ssww'
+let g:netrw_dirhist_8='/Users/yosuke.adachi/.vim'
