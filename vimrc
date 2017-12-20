@@ -58,8 +58,8 @@ set encoding=utf-8              " Set default encoding to UTF-8
 set backspace=indent,eol,start  " delete with backspace key
 
 " Colors and Syntax
-set t_Co=256
 syntax enable
+set t_Co=256
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_visibility="high"
@@ -71,13 +71,25 @@ colorscheme solarized
 au BufNewFile,BufRead *.template set filetype=json              "set template file type as json
 au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 
+" Python specific
+let python_highlight_all=1
+
+
 " Spaces and Tabs
 set tabstop=4
 set softtabstop=4
 set expandtab
 
+" Number settings
+set number relativenumber       " Show relative number and appsolute number (hybrid mode)
+
+augroup numbertoggle            " stop relative nubmer when not forcused
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 " UI Config
-set number                      " Show line numbers
 set showcmd                     " Show me what I'm typing
 set showmode                    " Show current mode.
 set cursorline
@@ -124,7 +136,7 @@ if executable('ag')
 endif
 
 "=================== airline =======================
-let g:airline_theme='solarized'
+let g:airline_theme = 'codedark'
 let g:airline_solarized_bg='dark'
 
 " folding settings come later
