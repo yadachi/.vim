@@ -30,6 +30,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Chiel92/vim-autoformat'
 "Plug 'python-mode/python-mode'
 
+" HTML support plugin
+Plug 'mattn/emmet-vim'
+
 " Json Plugin
 Plug 'elzr/vim-json'
 
@@ -135,9 +138,13 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-"=================== airline =======================
+" airline
 let g:airline_theme = 'codedark'
 let g:airline_solarized_bg='dark'
+
+" emmet setting
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall      " enable emmet for only html and css
 
 " folding settings come later
 
