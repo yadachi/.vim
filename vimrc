@@ -16,7 +16,7 @@ Plug 'w0rp/ale'
 " visual plugin
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdtree'
 
 " Auto complete
@@ -73,6 +73,7 @@ colorscheme solarized
 " File type settins
 au BufNewFile,BufRead *.template set filetype=json              "set template file type as json
 au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
 
 " Python specific
 let python_highlight_all=1
@@ -121,6 +122,12 @@ set incsearch
 set hlsearch
 set ignorecase
 nnoremap <leader><space> :nohlsearch<CR>
+
+" IndentLine 
+let g:vim_json_syntax_conceal = 0
+
+" vim-json
+set conceallevel=0
 
 " Ctrlp settings
 let g:ctrlp_cmd = 'CtrlP'
