@@ -76,7 +76,7 @@ au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
 
 " Python specific
-let python_highlight_all=1
+"let python_highlight_all=1
 
 
 " Spaces and Tabs
@@ -86,12 +86,6 @@ set expandtab
 
 " Number settings
 set number relativenumber       " Show relative number and appsolute number (hybrid mode)
-
-augroup numbertoggle            " stop relative nubmer when not forcused
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
 " UI Config
 set showcmd                     " Show me what I'm typing
@@ -123,11 +117,9 @@ set hlsearch
 set ignorecase
 nnoremap <leader><space> :nohlsearch<CR>
 
-" IndentLine 
+" IndentLine
 let g:vim_json_syntax_conceal = 0
-
-" vim-json
-set conceallevel=0
+let g:indentLine_bgcolor_term = 23
 
 " Ctrlp settings
 let g:ctrlp_cmd = 'CtrlP'
