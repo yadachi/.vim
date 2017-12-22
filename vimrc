@@ -1,5 +1,6 @@
 set nocompatible
 filetype on
+filetype indent on
 
 " vim-plug settings
 filetype plugin on
@@ -11,7 +12,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 
 " Syntax Checking
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
+Plug 'vim-syntastic/syntastic'
 
 " visual plugin
 Plug 'vim-airline/vim-airline'
@@ -28,7 +30,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Python plugin
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Chiel92/vim-autoformat'
-"Plug 'python-mode/python-mode'
+"Plug 'vim-python/python-syntax'
+Plug 'nvie/vim-flake8'
+Plug 'python-mode/python-mode'
 
 " HTML support plugin
 Plug 'mattn/emmet-vim'
@@ -42,6 +46,9 @@ Plug 'rodjek/vim-puppet'
 " Git support
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+
+" VimWiki
+Plug 'vimwiki/vimwiki'
 
 "PlugInstall [name ...] [#threads] 	Install plugins
 "PlugUpdate [name ...] [#threads] 	Install or update plugins
@@ -59,10 +66,14 @@ set nobackup                    " Don't create backup files
 set nowritebackup
 set encoding=utf-8              " Set default encoding to UTF-8
 set backspace=indent,eol,start  " delete with backspace key
+set lazyredraw
+
+" Python specific
+let python_highlight_all=1
 
 " Colors and Syntax
 syntax enable
-set t_Co=256
+"set t_Co=256
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_visibility="high"
@@ -71,13 +82,17 @@ set background=dark
 colorscheme solarized
 
 " File type settins
+au BufNewFile,BufRead *.py                                      " Python PEP8 indentation
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
 au BufNewFile,BufRead *.template set filetype=json              "set template file type as json
 au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
-
-" Python specific
-"let python_highlight_all=1
-
 
 " Spaces and Tabs
 set tabstop=4
@@ -85,7 +100,7 @@ set softtabstop=4
 set expandtab
 
 " Number settings
-set number relativenumber       " Show relative number and appsolute number (hybrid mode)
+set number
 
 " UI Config
 set showcmd                     " Show me what I'm typing
@@ -106,7 +121,8 @@ set splitright                  " Split vertical windows right to the current wi
 set splitbelow                  " Split horizontal windows below to the current windows
 
 " Browsing
-map <C-e> :NERDTreeToggle<CR>   " Open Nerdtree"
+execute "set <M-e>=\ee"
+map <M-e> :NERDTreeToggle<CR>     " Open Nerdtree
 
 " Searching
 set path+=**
@@ -119,7 +135,15 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " IndentLine
 let g:vim_json_syntax_conceal = 0
-let g:indentLine_bgcolor_term = 23
+"let g:indentLine_bgcolor_term = 23
+let g:indentLine_color_term = 166
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1               " close autocomplete window
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>      " jump to definition 
+
+" Autoformat
+noremap <F3> :Autoformat<CR>
 
 " Ctrlp settings
 let g:ctrlp_cmd = 'CtrlP'
@@ -145,8 +169,12 @@ let g:airline_solarized_bg='dark'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall      " enable emmet for only html and css
 
-" folding settings come later
+" folding settings
+set nofoldenable
 
 " Movement
 nnoremap j gj
 nnoremap k gk
+
+" Vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/Vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
