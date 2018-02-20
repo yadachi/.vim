@@ -13,26 +13,18 @@ Plug 'tpope/vim-endwise'
 
 " Syntax Checking
 "Plug 'w0rp/ale'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 
 " visual plugin
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdtree'
 
-" Auto complete
-Plug 'Valloric/YouCompleteMe'
-
-" fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
 
 " Python plugin
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Chiel92/vim-autoformat'
-"Plug 'vim-python/python-syntax'
 Plug 'nvie/vim-flake8'
-Plug 'python-mode/python-mode'
 
 " HTML support plugin
 Plug 'mattn/emmet-vim'
@@ -49,6 +41,9 @@ Plug 'tpope/vim-fugitive'
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
+
+" Calendar
+Plug 'mattn/calendar-vim'
 
 "PlugInstall [name ...] [#threads] 	Install plugins
 "PlugUpdate [name ...] [#threads] 	Install or update plugins
@@ -112,17 +107,13 @@ set wildignore+=*.pyc           " ignore python byte code
 set showmatch
 set nowrap                      " no line wrap at the end
 
-" WIndow
+" Window
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
-
-" Browsing
-execute "set <M-e>=\ee"
-map <M-e> :NERDTreeToggle<CR>     " Open Nerdtree
 
 " Searching
 set path+=**
@@ -138,28 +129,8 @@ let g:vim_json_syntax_conceal = 0
 "let g:indentLine_bgcolor_term = 23
 let g:indentLine_color_term = 166
 
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion=1               " close autocomplete window
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>      " jump to definition 
-
 " Autoformat
 noremap <F3> :Autoformat<CR>
-
-" Ctrlp settings
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_max_height = 10
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
- " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
 
 " airline
 let g:airline_theme = 'codedark'
