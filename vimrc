@@ -1,58 +1,29 @@
-set nocompatible
-filetype on
-filetype indent on
+" load plugins
+execute pathogen#infect()
+call pathogen#helptags()
 
-" vim-plug settings
-filetype plugin on
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-call plug#begin('~/.vim/plugged')
+set nocompatible 		" set iMproved, required
+filetype off
 
-" general
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-endwise'
-
-" Syntax Checking
-"Plug 'w0rp/ale'
-"Plug 'vim-syntastic/syntastic'
-
-" visual plugin
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Yggdroot/indentLine'
+filetype plugin indent on 	" required
 
 
-" Python plugin
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'Chiel92/vim-autoformat'
-Plug 'nvie/vim-flake8'
+"Plug 'Chiel92/vim-autoformat'
+"Plug 'nvie/vim-flake8'
 
 " HTML support plugin
-Plug 'mattn/emmet-vim'
+"Plug 'mattn/emmet-vim'
 
-" Json Plugin
-Plug 'elzr/vim-json'
 
 " Puppet Plugin
-Plug 'rodjek/vim-puppet'
-
-" Git support
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+"Plug 'rodjek/vim-puppet'
 
 " VimWiki
-Plug 'vimwiki/vimwiki'
+"Plug 'vimwiki/vimwiki'
 
 " Calendar
-Plug 'mattn/calendar-vim'
+"Plug 'mattn/calendar-vim'
 
-"PlugInstall [name ...] [#threads] 	Install plugins
-"PlugUpdate [name ...] [#threads] 	Install or update plugins
-"PlugClean[!] 	                    Remove unused directories (bang version will clean without prompt)
-"PlugUpgrade 	                    Upgrade vim-plug itself
-"PlugStatus 	                    Check the status of plugins
-"PlugDiff 	                        Examine changes from the previous update and the pending changes
-"PlugSnapshot[!] [output path] 	    Generate script for restoring the current snapshot of the plugins
-call plug#end()
 
 "" Settings
 set noerrorbells                " No beeps
@@ -64,11 +35,10 @@ set backspace=indent,eol,start  " delete with backspace key
 set lazyredraw
 
 " Python specific
-let python_highlight_all=1
+"let python_highlight_all=1
 
 " Colors and Syntax
 syntax enable
-"set t_Co=256
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_visibility="high"
@@ -126,15 +96,15 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " IndentLine
 let g:vim_json_syntax_conceal = 0
-"let g:indentLine_bgcolor_term = 23
+let g:indentLine_bgcolor_term = 23
 let g:indentLine_color_term = 166
 
 " Autoformat
-noremap <F3> :Autoformat<CR>
+"noremap <F3> :Autoformat<CR>
 
 " airline
-let g:airline_theme = 'codedark'
-let g:airline_solarized_bg='dark'
+let g:airline_theme = 'solarized'
+"let g:airline_solarized_bg='dark'
 
 " emmet setting
 let g:user_emmet_install_global = 0
@@ -147,5 +117,27 @@ set nofoldenable
 nnoremap j gj
 nnoremap k gk
 
+" enable mouse
+if has('mouse')
+  set mouse=a
+endif
+set ttymouse=xterm
+
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/Vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+
+" ==================== Completion =========================
+" use deoplete for vim.
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
+let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
+let g:deoplete#sources#go#align_class = 1
+
+  " Use partial fuzzy matches like YouCompleteMe
+call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
+call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
+
+
