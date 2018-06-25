@@ -7,24 +7,6 @@ filetype off
 
 filetype plugin indent on 	" required
 
-
-"Plug 'Chiel92/vim-autoformat'
-"Plug 'nvie/vim-flake8'
-
-" HTML support plugin
-"Plug 'mattn/emmet-vim'
-
-
-" Puppet Plugin
-"Plug 'rodjek/vim-puppet'
-
-" VimWiki
-"Plug 'vimwiki/vimwiki'
-
-" Calendar
-"Plug 'mattn/calendar-vim'
-
-
 "" Settings
 set noerrorbells                " No beeps
 set noswapfile                  " Don't use swapfile
@@ -33,9 +15,6 @@ set nowritebackup
 set encoding=utf-8              " Set default encoding to UTF-8
 set backspace=indent,eol,start  " delete with backspace key
 set lazyredraw
-
-" Python specific
-"let python_highlight_all=1
 
 " Colors and Syntax
 syntax enable
@@ -94,21 +73,16 @@ set hlsearch
 set ignorecase
 nnoremap <leader><space> :nohlsearch<CR>
 
+" Disable .netrwhist file
+let g:netrw_dirhistmax=0
+
 " IndentLine
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_bgcolor_term = 23
 let g:indentLine_color_term = 166
 
-" Autoformat
-"noremap <F3> :Autoformat<CR>
-
 " airline
 let g:airline_theme = 'solarized'
-"let g:airline_solarized_bg='dark'
-
-" emmet setting
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall      " enable emmet for only html and css
 
 " folding settings
 set nofoldenable
@@ -122,9 +96,6 @@ if has('mouse')
   set mouse=a
 endif
 set ttymouse=xterm
-
-" Vimwiki
-let g:vimwiki_list = [{'path': '~/Dropbox/Vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 
 " ==================== Completion =========================
@@ -141,3 +112,5 @@ call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
 call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 
 
+" ========= vim-better-whitespace ==================
+:autocmd FileType markdown EnableWhitespace
