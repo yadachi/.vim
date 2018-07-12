@@ -43,6 +43,7 @@ au BufNewFile,BufRead *.template set filetype=json              "set template fi
 au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.yaml,*.yml setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.rb,*.pp setlocal expandtab ts=2 sw=2
 
 " Number settings
 set number
