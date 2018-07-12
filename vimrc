@@ -16,6 +16,11 @@ set encoding=utf-8              " Set default encoding to UTF-8
 set backspace=indent,eol,start  " delete with backspace key
 set lazyredraw
 
+" Spaces and Tabs
+set tabstop=4
+set softtabstop=4
+set expandtab
+
 " Colors and Syntax
 syntax enable
 let g:solarized_termtrans=1
@@ -37,11 +42,7 @@ au BufNewFile,BufRead *.py                                      " Python PEP8 in
 au BufNewFile,BufRead *.template set filetype=json              "set template file type as json
 au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
-
-" Spaces and Tabs
-set tabstop=4
-set softtabstop=4
-set expandtab
+au BufNewFile,BufRead *.yaml,*.yml setlocal expandtab ts=2 sw=2
 
 " Number settings
 set number
