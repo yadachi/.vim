@@ -43,3 +43,9 @@
 [submodule ".vim/bundle/puppet"]
 	path = .vim/bundle/puppet
 	url = git://github.com/rodjek/vim-puppet.git
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "bundle/vim-yaml"]
+	path = bundle/vim-yaml
+	url = git@github.com:stephpy/vim-yaml.git
