@@ -23,12 +23,17 @@ set expandtab
 
 " Colors and Syntax
 syntax enable
+if has('gui_running')
+  set background=light
+  colorscheme solarized
+else
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_visibility="high"
 let g:solarized_contrast="high"
 set background=dark
 colorscheme solarized
+endif
 
 " File type settins
 au BufNewFile,BufRead *.py                                      " Python PEP8 indentation
