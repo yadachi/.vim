@@ -152,3 +152,9 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 " fzf settings
 set rtp+=~/.fzf
 nnoremap <silent> <leader><T> :Files<CR>
+
+" prettier
+let g:prettier#quickfix_enabled = 0
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.less,*.scss,*.json,*.md PrettierAsync
