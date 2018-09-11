@@ -16,6 +16,31 @@ set encoding=utf-8              " Set default encoding to UTF-8
 set backspace=indent,eol,start  " delete with backspace key
 set lazyredraw
 
+" leader key mapping
+let mapleader = ","
+let g:mapleader = ","
+
+" dont use arrowkeys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" really, just dont
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+
+" copy and paste to/from Vim and the clipboard
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+P
+vnoremap <C-p> "+P
+
+" access system clipboard
+set clipboard=unnamedplus
+
 " Spaces and Tabs
 set tabstop=4
 set shiftwidth=4
@@ -49,6 +74,7 @@ au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.yaml,*.yml setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.rb,*.pp setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.md,*.markdown setlocal expandtab ts=2 sw=2
 
 " Number settings
 set number
@@ -85,8 +111,9 @@ let g:netrw_dirhistmax=0
 
 " IndentLine
 let g:vim_json_syntax_conceal = 0
-let g:indentLine_bgcolor_term = 23
-let g:indentLine_color_term = 166
+let g:indentLine_color_term = 94
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = '⋅'
 
 " airline
 let g:airline_theme = 'solarized'
@@ -120,4 +147,8 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 
 
 " ========= vim-better-whitespace ==================
-:autocmd FileType markdown EnableWhitespace
+:autocmd FileType md Disablewhitespace
+
+" fzf settings
+set rtp+=~/.fzf
+nnoremap <silent> <leader><T> :Files<CR>
