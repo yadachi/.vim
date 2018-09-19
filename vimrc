@@ -111,6 +111,7 @@ let g:netrw_dirhistmax=0
 
 " IndentLine
 let g:vim_json_syntax_conceal = 0
+let g:indentLine_setConceal = 0
 let g:indentLine_color_term = 94
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '⋅'
@@ -152,3 +153,10 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 " fzf settings
 set rtp+=~/.fzf
 nnoremap <silent> <leader><T> :Files<CR>
+
+" prettier settings
+let g:prettier#autoformat = 0
+autocmd BufWritePost *.js,*.css,*.less,*.scss,*.json Prettier
+
+" vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/Logbook/', 'syntax': 'markdown', 'ext': '.md'}]
