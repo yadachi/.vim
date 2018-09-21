@@ -115,6 +115,7 @@ let g:indentLine_setConceal = 0
 let g:indentLine_color_term = 94
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '⋅'
+let g:indentLine_fileTypeExclude = ['md']
 
 " airline
 let g:airline_theme = 'solarized'
