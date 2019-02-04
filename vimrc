@@ -3,8 +3,6 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 set nocompatible 		" set iMproved, required
-filetype off
-
 filetype plugin indent on 	" required
 
 "" Settings
@@ -42,8 +40,9 @@ vnoremap <C-p> "+P
 set clipboard=unnamedplus
 
 " Spaces and Tabs
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 
 " Colors and Syntax
@@ -61,20 +60,8 @@ colorscheme solarized
 endif
 
 " File type settins
-au BufNewFile,BufRead *.py                                      " Python PEP8 indentation
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
-au BufNewFile,BufRead *.template set filetype=json              "set template file type as json
-au BufNewFile,BufRead *.json,*.js setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.html,*.css setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.yaml,*.yml setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.rb,*.pp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.md,*.markdown setlocal expandtab ts=2 sw=2
+autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab textwidth=79 autoindent fileformat=unix
+autocmd BufNewFile,BufRead *.template setfiletype=json              "set template file type as json
 
 " Number settings
 set number
@@ -89,6 +76,10 @@ set wildignore+=*.pyc           " ignore python byte code
 set showmatch
 set nowrap                      " no line wrap at the end
 
+" list setting
+nmap <leader>l :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
+
 " Window
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -96,6 +87,18 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
+" tab
+map <C-S-]> gt
+map <C-S-[> gT
+
+" buffer
+set hidden                      " don't complain when buffer is modified
+
+" NerdTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>  " toggle nerdtree window
 
 " Searching
 set path+=**
