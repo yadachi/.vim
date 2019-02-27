@@ -114,7 +114,7 @@ let g:netrw_dirhistmax=0
 
 " IndentLine
 let g:vim_json_syntax_conceal = 0
-let g:indentLine_setConceal = 0
+"let g:indentLine_setConceal = 0
 let g:indentLine_color_term = 94
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '⋅'
@@ -163,3 +163,8 @@ autocmd BufWritePost *.js,*.css,*.less,*.scss,*.json Prettier
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/Logbook/', 'syntax': 'markdown', 'ext': '.md'}]
+
+" keysound
+let g:keysound_py_version = 3
+let g:keysound_enable = 1
+let g:keysound_theme = 'typewriter'
