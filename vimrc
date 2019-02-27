@@ -93,6 +93,7 @@ map <C-S-[> gT
 
 " buffer
 set hidden                      " don't complain when buffer is modified
+nnoremap <leader>r :bnext<CR>   " loop through buffer
 
 " NerdTree
 autocmd StdinReadPre * let s:std_in=1
