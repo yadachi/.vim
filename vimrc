@@ -169,3 +169,7 @@ let g:vimwiki_list = [{'path': '~/Dropbox/Logbook/', 'syntax': 'markdown', 'ext'
 let g:keysound_py_version = 3
 let g:keysound_enable = 1
 let g:keysound_theme = 'typewriter'
+
+" black formatter settings
+let g:black_virtualenv = '~/.local/share/black'
+autocmd BufWritePre *.py execute ':Black'
