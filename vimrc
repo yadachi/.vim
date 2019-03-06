@@ -160,7 +160,7 @@ nnoremap <silent> <leader><T> :Files<CR>
 
 " prettier settings
 let g:prettier#autoformat = 0
-autocmd BufWritePost *.js,*.css,*.less,*.scss,*.json Prettier
+autocmd BufWritePost *.js,*.css,*.less,*.scss Prettier
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/Logbook/', 'syntax': 'markdown', 'ext': '.md'}]
