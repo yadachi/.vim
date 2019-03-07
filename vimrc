@@ -172,4 +172,5 @@ let g:keysound_theme = 'typewriter'
 
 " black formatter settings
 let g:black_virtualenv = '~/.local/share/black'
+let g:black_fast = 1
 autocmd BufWritePre *.py execute ':Black'
