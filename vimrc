@@ -45,6 +45,12 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" show line-length
+if (exists('+colorcolumn'))
+      set colorcolumn=88
+      highlight ColorColumn ctermbg=9
+endif
+
 " Colors and Syntax
 syntax enable
 if has('gui_running')
@@ -161,14 +167,6 @@ nnoremap <silent> <leader><T> :Files<CR>
 " prettier settings
 let g:prettier#autoformat = 0
 autocmd BufWritePost *.js,*.css,*.less,*.scss Prettier
-
-" vimwiki
-let g:vimwiki_list = [{'path': '~/Dropbox/Logbook/', 'syntax': 'markdown', 'ext': '.md'}]
-
-" keysound
-let g:keysound_py_version = 3
-let g:keysound_enable = 1
-let g:keysound_theme = 'typewriter'
 
 " black formatter settings
 let g:black_virtualenv = '~/.local/share/black'
