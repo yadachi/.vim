@@ -1,9 +1,10 @@
-" load plugins
+load plugins
 execute pathogen#infect()
 call pathogen#helptags()
 
 set nocompatible 		" set iMproved, required
 filetype plugin indent on 	" required
+syntax on
 
 "" Settings
 set noerrorbells                " No beeps
@@ -102,6 +103,9 @@ set hidden                      " don't complain when buffer is modified
 nnoremap <leader>r :bnext<CR>   " loop through buffer
 
 " NerdTree
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+autocmd BufEnter NERD_tree* :LeadingSpaceDisable " work around with indent issue
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -128,6 +132,7 @@ let g:indentLine_leadingSpaceChar = '⋅'
 
 " airline
 let g:airline_theme = 'solarized'
+let g:airline_powerline_fonts = 1
 
 " folding settings
 set nofoldenable
@@ -162,7 +167,7 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 
 " fzf settings
 set rtp+=~/.fzf
-nnoremap <silent> <leader><T> :Files<CR>
+nnoremap <leader>t :Files<CR>
 
 " prettier settings
 let g:prettier#autoformat = 0

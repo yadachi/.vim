@@ -67,3 +67,9 @@
 [submodule "bundle/black"]
 	path = bundle/black
 	url = https://github.com/ambv/black.git
+[submodule "bundle/nerdtree-git-plugin"]
+	path = bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule "bundle/vim-devicons"]
+	path = bundle/vim-devicons
+	url = https://github.com/ryanoasis/vim-devicons.git
