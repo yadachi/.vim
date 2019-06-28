@@ -103,6 +103,8 @@ set hidden                      " don't complain when buffer is modified
 nnoremap <leader>r :bnext<CR>   " loop through buffer
 
 " NerdTree
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 autocmd BufEnter NERD_tree* :LeadingSpaceDisable " work around with indent issue
