@@ -178,4 +178,4 @@ autocmd BufWritePost *.js,*.css,*.less,*.scss Prettier
 " black formatter settings
 let g:black_virtualenv = '~/.local/share/black'
 let g:black_fast = 1
-autocmd BufWritePre *.py execute ':Black'
+"autocmd BufWritePre *.py execute ':Black'
