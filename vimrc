@@ -102,9 +102,7 @@ map <C-S-[> gT
 set hidden                      " don't complain when buffer is modified
 nnoremap <leader>r :bnext<CR>   " loop through buffer
 
-" NerdTree
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"NerdTree
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 autocmd BufEnter NERD_tree* :LeadingSpaceDisable " work around with indent issue
@@ -131,10 +129,12 @@ let g:vim_json_syntax_conceal = 0
 let g:indentLine_color_term = 94
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '⋅'
+let g:indentLine_concealcursor = 'nv'
 
 " airline
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'papercolor'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " folding settings
 set nofoldenable
