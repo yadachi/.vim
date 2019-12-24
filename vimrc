@@ -1,10 +1,43 @@
-load plugins
-execute pathogen#infect()
-call pathogen#helptags()
-
 set nocompatible 		" set iMproved, required
 filetype plugin indent on 	" required
 syntax on
+
+"Auto install Plug https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+" set rtp+=/usr/local/opt/fzf "Fuzzy finder, installed via homebrew
+call plug#begin('~/.vim/plugged')
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/indentLine'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'airblade/vim-gitgutter'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'rodjek/vim-puppet'
+Plug 'tpope/vim-surround'
+Plug 'stephpy/vim-yaml'
+Plug 'junegunn/fzf.vim'
+Plug 'prettier/vim-prettier'
+Plug 'scrooloose/nerdtree'
+Plug 'ambv/black'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
+call plug#end()
+
 
 "" Settings
 set noerrorbells                " No beeps
