@@ -35,6 +35,7 @@ Plug 'ambv/black'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 call plug#end()
 
