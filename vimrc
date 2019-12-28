@@ -206,6 +206,7 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 " fzf settings
 set rtp+=~/.fzf
 nnoremap <leader>t :Files<CR>
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " prettier settings
 let g:prettier#autoformat = 0
