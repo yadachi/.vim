@@ -206,6 +206,16 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 " fzf settings
 set rtp+=~/.fzf
 nnoremap <leader>t :Files<CR>
+" fzf Files wit preview
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+" fzf Rg wit preview
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview(), <bang>0)
+
+
 
 " prettier settings
 let g:prettier#autoformat = 0
