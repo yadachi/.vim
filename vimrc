@@ -74,7 +74,11 @@ nnoremap <C-p> "+P
 vnoremap <C-p> "+P
 
 " access system clipboard
-set clipboard=unnamedplus
+if system('uname') =~ "Darwin"
+  set clipboard=unnamed
+elseif system("uname") == "Linux"
+  set clipboard=unnamedplus
+endif"
 
 " Spaces and Tabs
 set tabstop=2
