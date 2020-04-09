@@ -102,7 +102,7 @@ let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_visibility="high"
 let g:solarized_contrast="high"
-set background=dark
+set background=light
 colorscheme solarized
 endif
 
@@ -209,7 +209,7 @@ call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 
 " fzf settings
 set rtp+=~/.fzf
-nnoremap <leader>t :Files<CR>
+nnoremap <C-p> :Files<CR>
 " fzf Files wit preview
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
