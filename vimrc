@@ -25,19 +25,20 @@ Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'roxma/nvim-yarp'
-Plug 'rodjek/vim-puppet'
 Plug 'tpope/vim-surround'
 Plug 'stephpy/vim-yaml'
 Plug 'junegunn/fzf.vim'
 Plug 'prettier/vim-prettier'
 Plug 'scrooloose/nerdtree'
-Plug 'ambv/black'
+Plug 'psf/black'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'overcache/NeoSolarized'
+Plug 'jlanzarotta/bufexplorer'
 
 call plug#end()
 
@@ -50,6 +51,9 @@ set nowritebackup
 set encoding=utf-8              " Set default encoding to UTF-8
 set backspace=indent,eol,start  " delete with backspace key
 set lazyredraw
+set title
+set autoindent
+set nowrap                      " No Wrap lines
 
 " leader key mapping
 let mapleader = ","
@@ -85,26 +89,15 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-
-" show line-length
-if (exists('+colorcolumn'))
-      set colorcolumn=88
-      highlight ColorColumn ctermbg=9
-endif
+set ai                            "Auto indent
+set si                            "Smart indent
 
 " Colors and Syntax
+set termguicolors
+let g:neosolarized_termtrans=1
 syntax enable
-if has('gui_running')
-  set background=light
-  colorscheme solarized
-else
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_visibility="high"
-let g:solarized_contrast="high"
-set background=light
-colorscheme solarized
-endif
+set background=dark
+colorscheme NeoSolarized
 
 " File type settins
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab textwidth=79 autoindent fileformat=unix
@@ -122,6 +115,9 @@ set wildmenu wildmode=list:full
 set wildignore+=*.pyc           " ignore python byte code
 set showmatch
 set nowrap                      " no line wrap at the end
+set cmdheight=1
+set laststatus=2
+set scrolloff=10
 
 " list setting
 nmap <leader>l :set list!<CR>
@@ -134,6 +130,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
+
 " tab
 map <C-S-]> gt
 map <C-S-[> gT
@@ -141,6 +138,10 @@ map <C-S-[> gT
 " buffer
 set hidden                      " don't complain when buffer is modified
 nnoremap <leader>r :bnext<CR>   " loop through buffer
+
+" bufexplorer
+map ,, ,be
+
 
 "NerdTree
 let g:NERDTreeDirArrowExpandable = '+'
@@ -165,7 +166,7 @@ let g:netrw_dirhistmax=0
 
 " IndentLine
 let g:vim_json_syntax_conceal = 0
-"let g:indentLine_setConceal = 0
+let g:indentLine_setConceal = 0
 let g:indentLine_color_term = 94
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '⋅'
@@ -193,10 +194,9 @@ set ttymouse=xterm
 " ==================== Completion =========================
 " use deoplete for vim.
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
 let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
+call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'member', 'tag', 'file', 'neosnippet']})
 
   " Use partial fuzzy matches like YouCompleteMe
 call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
@@ -223,7 +223,7 @@ command! -bang -nargs=* Rg
 
 " prettier settings
 let g:prettier#autoformat = 0
-autocmd BufWritePost *.js,*.css,*.less,*.scss Prettier
+autocmd BufWritePost *.js,*.css,*.less,*.scss,*.json Prettier
 
 " black formatter settings
 let g:black_virtualenv = '~/.local/share/black'
