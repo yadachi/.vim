@@ -22,15 +22,12 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
 Plug 'tpope/vim-surround'
 Plug 'stephpy/vim-yaml'
 Plug 'junegunn/fzf.vim'
 Plug 'prettier/vim-prettier'
 Plug 'scrooloose/nerdtree'
-Plug 'psf/black'
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -39,6 +36,9 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'overcache/NeoSolarized'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'bouk/vim-markdown'
+Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+Plug 'towolf/vim-helm'
 
 call plug#end()
 
@@ -94,20 +94,20 @@ set si                            "Smart indent
 
 " Colors and Syntax
 set termguicolors
-let g:neosolarized_termtrans=1
+"let g:neosolarized_termtrans=1
 syntax enable
 set background=dark
-colorscheme NeoSolarized
+colorscheme Nord
 
 " File type settins
-autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab textwidth=79 autoindent fileformat=unix
+autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab autoindent fileformat=unix
 autocmd BufNewFile,BufRead *.template setfiletype=json              "set template file type as json
 
 " Number settings
 set number
 
 " UI Config
-set showcmd                     " Show me what I'm typing
+
 set showmode                    " Show current mode.
 set cursorline
 set ruler                       " Show the cursor position all the time
@@ -142,13 +142,12 @@ nnoremap <leader>r :bnext<CR>   " loop through buffer
 " bufexplorer
 map ,, ,be
 
-
 "NerdTree
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 autocmd BufEnter NERD_tree* :LeadingSpaceDisable " work around with indent issue
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>  " toggle nerdtree window
 
@@ -160,6 +159,11 @@ set incsearch
 set hlsearch
 set ignorecase
 nnoremap <leader><space> :nohlsearch<CR>
+
+" Keep eol on original
+if exists('+fixeol')
+  set nofixeol
+endif
 
 " Disable .netrwhist file
 let g:netrw_dirhistmax=0
@@ -188,20 +192,6 @@ nnoremap k gk
 if has('mouse')
   set mouse=a
 endif
-set ttymouse=xterm
-
-
-" ==================== Completion =========================
-" use deoplete for vim.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
-let g:deoplete#sources#go#align_class = 1
-call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'member', 'tag', 'file', 'neosnippet']})
-
-  " Use partial fuzzy matches like YouCompleteMe
-call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
-call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
-call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 
 
 " ========= vim-better-whitespace ==================
@@ -220,7 +210,6 @@ command! -bang -nargs=* Rg
     \   fzf#vim#with_preview(), <bang>0)
 
 
-
 " prettier settings
 let g:prettier#autoformat = 0
 autocmd BufWritePost *.js,*.css,*.less,*.scss,*.json Prettier
@@ -229,3 +218,47 @@ autocmd BufWritePost *.js,*.css,*.less,*.scss,*.json Prettier
 let g:black_virtualenv = '~/.local/share/black'
 let g:black_fast = 1
 "autocmd BufWritePre *.py execute ':Black'
+
+" ZK config
+
+function! SNote(...)
+  let path = strftime("%Y%m%d%H%M")." ".trim(join(a:000)).".md"
+  execute ":sp " . fnameescape(path)
+endfunction
+command! -nargs=* SNote call SNote(<f-args>)
+
+function! Note(...)
+  let path = strftime("%Y%m%d%H%M")." ".trim(join(a:000)).".md"
+  execute ":e " . fnameescape(path)
+endfunction
+command! -nargs=* Note call Note(<f-args>)
+
+function! ZettelkastenSetup()
+  if expand("%:t") !~ '^[0-9]\+'
+    return
+  endif
+  " syn region mkdFootnotes matchgroup=mkdDelimiter start="\[\["    end="\]\]"
+
+  inoremap <expr> <plug>(fzf-complete-path-custom) fzf#vim#complete#path("rg --files -t md \| sed 's/^/[[/g' \| sed 's/$/]]/'")
+  imap <buffer> [[ <plug>(fzf-complete-path-custom)
+
+  function! s:CompleteTagsReducer(lines)
+    if len(a:lines) == 1
+      return "#" . a:lines[0]
+    else
+      return split(a:lines[1], '\t ')[1]
+    end
+  endfunction
+
+  inoremap <expr> <plug>(fzf-complete-tags) fzf#vim#complete(fzf#wrap({
+        \ 'source': 'zkt-raw',
+        \ 'options': '--multi --ansi --nth 2 --print-query --exact --header "Enter without a selection creates new tag"',
+        \ 'reducer': function('<sid>CompleteTagsReducer')
+        \ }))
+  imap <buffer> # <plug>(fzf-complete-tags)
+endfunction
+
+
+let g:lsp_diagnostics_echo_cursor = 1
+
+
